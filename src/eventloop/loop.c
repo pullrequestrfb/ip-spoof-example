@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <uv.h>
 #include "loop.h"
 
 uv_loop_t* new_loop()
