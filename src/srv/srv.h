@@ -1,12 +1,15 @@
+#include <uv.h>
+
 #ifndef SRV_H_
 #define SRV_H_
     typedef struct Server
     {
         char* addr_str;
-        int socket;
-    } Server;
+        int port;
+        uv_udp_t *socket;
+    } server_t;
 
-    int listen_and_serve(struct Server *s);
+    int listen_and_serve(server_t *s, uv_loop_t *loop);
 
-    struct Server* new_server(char *proto, char *addr);
+    server_t new_server(char *addr, int port);
 #endif
