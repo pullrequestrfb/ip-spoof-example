@@ -6,6 +6,7 @@ HAS_GYP = 0
 HAS_CURL = 0
 HAS_AUTOMAKE = 0
 HAS_LIBTOOL = 0
+SRC_FILES = ./ip_spoof.c ./src/eventloop/loop.c ./src/srv/srv.c
 
 ifeq ("$(shell uname -s)","Linux")
 	DISTRO = $(shell source /etc/os-release && echo $NAME)
@@ -88,7 +89,7 @@ get-deps:
 
 build:
 	mkdir -p dist/
-	$(CC) -o dist/ipspoof ip_spoof.c
+	$(CC)  -pthread -o dist/ipspoof $(SRC_FILES) /usr/local/lib/libuv.a
 
 clean:
 	rm -rf dist/
