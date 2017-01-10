@@ -50,9 +50,13 @@ int send_msg(server_t *s, char* payload)
     return uv_udp_send(&req, s->socket, &buf, 1, (const struct sockaddr*)s->addr, on_send);
 }
 
-server_t* new_server(char* addr, int port)
+server_t* new_server(char* addr, int port, int socket_fd)
 {
     uv_udp_t *socket = (uv_udp_t*)malloc(sizeof(uv_udp_t));
+    if(socket_fd != -1)
+    {
+        uv_udp_open(socket, socket_fd);
+    }
     server_t* s = (server_t*)malloc(sizeof(server_t));
     s->addr_str = addr;
     s->port = port;
