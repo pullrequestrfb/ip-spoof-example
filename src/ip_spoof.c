@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <uv.h>
-#include "src/eventloop/loop.h"
-#include "src/srv/srv.h"
+#include "eventloop/loop.h"
+#include "srv/srv.h"
 
 int main() {
     uv_loop_t *loop = new_loop();

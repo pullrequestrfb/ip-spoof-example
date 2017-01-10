@@ -99,3 +99,6 @@ install:
 
 uninstall:
 	rm /usr/local/bin/ipspoof
+
+docker:
+	docker build -t ipspoof .
