@@ -18,5 +18,5 @@
 
     int send_msg(server_t *s, char* payload);
 
-    server_t* new_server(char *addr, int port);
+    server_t* new_server(char *addr, int port, int socket_fd);
 #endif

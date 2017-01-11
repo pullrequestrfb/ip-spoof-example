@@ -6,7 +6,7 @@ HAS_GYP = 0
 HAS_CURL = 0
 HAS_AUTOMAKE = 0
 HAS_LIBTOOL = 0
-SRC_FILES = ./src/ip_spoof.c ./src/eventloop/loop.c ./src/srv/srv.c
+SRC_FILES = ./src/ip_spoof.c ./src/eventloop/loop.c ./src/srv/srv.c ./src/spoof/socket.c
 
 ifeq ("$(shell uname -s)","Linux")
 	DISTRO = $(shell source /etc/os-release && echo $NAME)
