@@ -7,7 +7,8 @@
 
 int main() {
     uv_loop_t *loop = new_loop();
-    server_t *server = new_server("0.0.0.0", 8080, get_socket());
+    int socket_fd = get_socket();
+    server_t *server = new_server("0.0.0.0", 8080, socket_fd);
     listen_and_serve(server, loop);
     return 0;
 }
