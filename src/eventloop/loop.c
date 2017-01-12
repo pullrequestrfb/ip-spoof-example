@@ -19,4 +19,3 @@ void destroy_loop(uv_loop_t *loop)
     uv_loop_close(loop);
     free(loop);
 }
-
