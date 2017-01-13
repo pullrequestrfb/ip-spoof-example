@@ -17,11 +17,11 @@
 
     char* gen_datagram(struct sockaddr_in *sin);
 
-    void set_ipheader(struct iphdr *iph, struct sockaddr_in *sin);
+    void set_ipheader(struct iphdr *iph, struct sockaddr_in *sin, char datagram[4096], char source_ip[32], char *data);
 
-    void set_udpheader(struct udphdr *udph);
+    void set_udpheader(struct udphdr *udph, char *data);
 
-    void set_psuedo_header(struct psuedo_header *psh, struct sockaddr_in *sin, char *data);
+    void set_pseudo_header(struct pseudo_header *psh, struct sockaddr_in *sin, struct udphdr *udph, char source_ip[32], char *data);
 
     void set_sockaddr_in(struct sockaddr_in *sin);
 
