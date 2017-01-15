@@ -39,7 +39,8 @@ char* gen_datagram(struct sockaddr_in *sin)
     set_sockaddr_in(sin);
     set_ipheader(iph, sin, datagram, source_ip, data);
     set_udpheader(udph, data);
-    set_pseudo_header(psh, sin, udph, source_ip, data);
+    set_pseudo_header(&psh, sin, udph, source_ip, data);
+    return data;
 }
 
 void set_ipheader(struct iphdr *iph, struct sockaddr_in *sin, char datagram[4096], char source_ip[32], char *data)

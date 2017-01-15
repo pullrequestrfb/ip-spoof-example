@@ -7,6 +7,7 @@ static void on_recv(uv_udp_t *handler, ssize_t nread, const uv_buf_t *rcvbuf, co
     if(nread > 0)
     {
         printf("received msg");
+        printf("%s", rcvbuf->base);
     }
     free(rcvbuf->base);
 }
