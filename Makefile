@@ -89,7 +89,7 @@ get-deps:
 
 build:
 	mkdir -p dist/
-	$(CC)  -pthread -o dist/ipspoof $(SRC_FILES) /usr/local/lib/libuv.a
+	$(CC) -pthread -o dist/ipspoof $(SRC_FILES) /usr/local/lib/libuv.a
 
 clean:
 	rm -rf dist/

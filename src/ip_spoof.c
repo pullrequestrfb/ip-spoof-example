@@ -28,6 +28,11 @@ void *start(void *ptr)
     pthread_mutex_unlock(&loop_lock);
     int socket_fd = get_socket();
     server_t *server = new_server("0.0.0.0", 8080, socket_fd);
+    if(server == NULL)
+    {
+        fprintf(stderr, "could not create server\n");
+        exit(1);
+    }
     listen_and_serve(server, loop);
     run_events(loop);
     return NULL;
@@ -37,13 +42,15 @@ void *send_init(void *addr)
 {
     int socket_fd = get_socket();
     char** a = (char**) addr;
-    server_t *remote = new_server(*a, 8080, socket_fd);
+    server_t *remote = NULL;
     char* payload = gen_datagram(remote->addr);
     int has_loop = 0;
+    printf("starting send loop\n");
     for(;;)
     {
         if(!has_loop)
         {
+            printf("checking for main loop\n");
             pthread_mutex_lock(&loop_lock);
             if(loop)
                 has_loop = 1;
@@ -51,6 +58,8 @@ void *send_init(void *addr)
         }
         if(has_loop)
         {
+            if(remote == NULL)
+                remote = new_remote(*a, loop, socket_fd);
             send_msg(remote, payload);
             sleep(1);
         }
@@ -70,10 +79,15 @@ int main(int argc, char** argv)
         return 1;
     }
     pthread_t send_loop;
-    char *remote_addr = argv[sizeof(argv) - 2];
+    char *remote_addr = argv[2];
+    sleep(1); // HACK
     if(pthread_create(&send_loop, NULL, send_init, &remote_addr)){
         fprintf(stderr, "Error creating send thread");
         return 1;
+    }
+    if(pthread_join(send_loop, NULL)){
+        fprintf(stderr, "Error joining send thread\n");
+        return -1;
     }
     if(pthread_join(srv, NULL))
     {
