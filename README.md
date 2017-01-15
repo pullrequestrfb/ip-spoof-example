@@ -4,11 +4,9 @@
 
 ## Installation
 
-Simply -
 * open Terminal
-* `git clone`
-* `cd` into the newly created directory
-* `make docker`
+* `git clone [REPO]`
+* `cd ./ip-spoof-example && make docker`
 
 ## Synopsis
 
