@@ -5,6 +5,7 @@
 
 unsigned short checksum(unsigned short *ptr,int nbytes)
 {
+    printf("creating checksum...\n");
     register long sum;
     unsigned short oddbyte;
     register short answer;
@@ -23,6 +24,8 @@ unsigned short checksum(unsigned short *ptr,int nbytes)
     sum = (sum>>16) + (sum & 0xffff);
     sum = sum + (sum>>16);
     answer = (short)~sum;
+    printf("created checksum %d\n", answer);
+    return answer;
 }
 
 char* gen_datagram(struct sockaddr_in *sin)
